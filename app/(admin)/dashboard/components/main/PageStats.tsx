@@ -2,16 +2,12 @@ import { FaClone, FaComments, FaEye, FaUsers } from 'react-icons/fa';
 import { prisma } from '@/api/prisma';
 
 const PageStats = async () => {
-  // const sumPosts = await countPosts();
-  // const {
-  //   _sum: { views: sumViews },
-  // } = await countViews();
-  // const sumComments = await countComments();
-  // const sumUsers = await countUsers();
-  const sumPosts = 23;
-  const sumViews = 432;
-  const sumComments = 44;
-  const sumUsers = 3;
+  const sumPosts = await countPosts();
+  const {
+    _sum: { views: sumViews },
+  } = await countViews();
+  const sumComments = await countComments();
+  const sumUsers = await countUsers();
 
   return (
     <section className='flex flex-col gap-y-3'>
@@ -42,14 +38,14 @@ const PageStats = async () => {
   );
 };
 
-// const countPosts = async () => await prisma.nc_posts.count();
-// const countViews = async () =>
-//   await prisma.nc_posts.aggregate({
-//     _sum: {
-//       views: true,
-//     },
-//   });
-// const countComments = async () => await prisma.nc_comments.count();
-// const countUsers = async () => await prisma.nc_users.count();
+const countPosts = async () => await prisma.nc_posts.count();
+const countViews = async () =>
+  await prisma.nc_posts.aggregate({
+    _sum: {
+      views: true,
+    },
+  });
+const countComments = async () => await prisma.nc_comments.count();
+const countUsers = async () => await prisma.nc_users.count();
 
 export default PageStats;
