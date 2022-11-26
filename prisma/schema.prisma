@@ -1,0 +1,73 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model nc_comments {
+  id        String   @id
+  author    String?  @default("Anonim")
+  content   String
+  postId    String
+  createdAt DateTime @default(now()) @db.Timestamptz(6)
+  nc_posts  nc_posts @relation(fields: [postId], references: [id])
+}
+
+model nc_posts {
+  id          String        @id
+  title       String
+  content     String?
+  thumbnail   String?
+  authorId    String
+  views       Int           @default(0)
+  createdAt   DateTime      @default(now()) @db.Timestamptz(6)
+  updatedAt   DateTime      @db.Timestamptz(6)
+  isPublished Boolean       @default(false)
+  nc_users    nc_users      @relation(fields: [authorId], references: [id])
+  nc_comments nc_comments[]
+  nc_tags     nc_tags[]
+}
+
+model nc_site_config {
+  id          String   @id
+  name        String
+  description String?
+  keywords    String?
+  favicon     String?
+  ownerId     String   @unique
+  updatedAt   DateTime @db.Timestamptz(6)
+  nc_users    nc_users @relation(fields: [ownerId], references: [id])
+}
+
+model nc_tags {
+  id        String     @id
+  name      String     @unique
+  views     Int        @default(0)
+  createdAt DateTime   @default(now()) @db.Timestamptz(6)
+  nc_posts  nc_posts[]
+}
+
+model nc_users {
+  id             String          @id
+  username       String          @unique
+  password       String
+  fullName       String
+  email          String          @unique
+  phone          String?         @unique
+  bio            String?
+  picture        String?
+  role           nc_roles        @default(USER)
+  createdAt      DateTime        @default(now()) @db.Timestamptz(6)
+  updatedAt      DateTime        @db.Timestamptz(6)
+  nc_posts       nc_posts[]
+  nc_site_config nc_site_config?
+}
+
+enum nc_roles {
+  USER
+  AUTHOR
+  ADMIN
+}

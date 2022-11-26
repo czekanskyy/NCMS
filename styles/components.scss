@@ -1,0 +1,70 @@
+@tailwind components;
+
+@layer components {
+  .dashboard-item {
+    @apply uppercase flex items-center gap-x-2 cursor-pointer font-semibold text-gray-700 transition-all hover:item-active;
+  }
+
+  .item-active {
+    @apply text-blue-500;
+  }
+
+  .post {
+    @apply w-full h-96 overflow-hidden rounded-2xl shadow-lg transition-all hover:shadow-xl;
+  }
+
+  .post-large {
+    @apply post col-span-8 grid place-content-center relative bg-cover bg-center text-white;
+  }
+
+  .post-small {
+    @apply post col-span-4 flex flex-col bg-white;
+  }
+
+  .table-header {
+    @apply text-start px-4 py-3;
+  }
+
+  .table-data {
+    @apply px-4 py-3 whitespace-nowrap;
+  }
+
+  .table-gray {
+    @apply table-auto col-span-full w-full text-xs lg:text-sm xl:text-base bg-white text-gray-900 rounded-xl overflow-hidden;
+  }
+
+  .table-body {
+    @apply border-t border-t-gray-200 text-gray-700 transition-all duration-100 hover:bg-gray-50;
+  }
+
+  .input {
+    @apply px-3 py-1 bg-gray-50 rounded-md border outline-none transition-all focus:border-gray-400 hover:border-gray-400 text-gray-700 text-lg;
+  }
+
+  .btn-editor {
+    @apply w-9 h-9 text-lg font-medium grid place-content-center rounded-md transition-all text-gray-600 hover:bg-gray-100 hover:text-gray-700 cursor-pointer outline-none;
+  }
+
+  .btn-editor-active {
+    @apply btn-editor bg-blue-100 text-blue-700;
+  }
+
+  .btn-select {
+    @apply btn-editor w-max flex items-center px-3 justify-between whitespace-nowrap overflow-hidden outline-none;
+  }
+
+  .btn-select-active {
+    @apply btn-select bg-blue-100 text-blue-700;
+  }
+
+  .btn-font {
+    @apply btn-editor w-full text-left px-3 justify-start;
+  }
+
+  .editor {
+    * {
+      outline: none;
+    }
+    @apply px-6 py-3;
+  }
+}
