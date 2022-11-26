@@ -20,8 +20,8 @@ const Profile = () => {
 
   return (
     <div className='flex flex-col items-center gap-y-1'>
-      <div className='relative h-16 w-16 mb-2'>
-        <Image src={user?.picture || defaultImage} alt='Profile picture' fill sizes='10vw' className='rounded-full shadow-lg' />
+      <div className='relative h-16 w-16 mb-2 object-cover'>
+        <Image src={user?.picture || defaultImage} alt='Profile picture' fill sizes='10vw' className='rounded-full shadow-lg h-16 w-16' />
       </div>
       {user?.fullName ? <p className='font-bold text-lg'>{user?.fullName}</p> : <p className='w-32 h-5 my-1 bg-white rounded-lg animate-pulse' />}
       {user?.email ? (

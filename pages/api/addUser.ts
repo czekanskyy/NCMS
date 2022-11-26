@@ -3,15 +3,19 @@ import { NextApiRequest, NextApiResponse } from 'next';
 import { SHA3 } from 'crypto-js';
 
 const handler = async (req: NextApiRequest, res: NextApiResponse) => {
-  const { username, password, fullName, email, role } = req.body;
+  const { username, fullName, email, phone, bio, picture, passwordF, passwordR } = req.body;
+
   try {
     const user = await prisma.nc_users.create({
       data: {
         username,
-        password: SHA3(password).toString(),
         fullName,
         email,
-        role,
+        phone,
+        bio,
+        picture,
+        password: SHA3(passwordF).toString(),
+        role: 'USER',
       },
     });
 
