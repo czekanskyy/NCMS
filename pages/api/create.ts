@@ -14,6 +14,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
         role,
       },
     });
+
     res.status(200).json(user);
   } catch (error: any) {
     console.error(`Błąd dodawania użytkownika: ${error.message}`);
