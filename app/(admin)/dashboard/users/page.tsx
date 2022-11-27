@@ -15,7 +15,9 @@ const Users = async () => {
       <AddUser />
 
       <UsersTable title='Administratorzy' users={admins} ownerId={ownerId} />
+
       <UsersTable title='Autorzy' users={authors} />
+
       <UsersTable title='Użytkownicy' users={users} />
     </div>
   );

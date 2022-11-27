@@ -2,8 +2,6 @@ import NextAuth, { NextAuthOptions } from 'next-auth';
 import CredentialsProvider from 'next-auth/providers/credentials';
 import { prisma } from '@/api/prisma';
 import { SHA3 } from 'crypto-js';
-import { nc_users } from '@prisma/client';
-import { SessionE, TokenE } from '@typings';
 
 export const authOptions: NextAuthOptions = {
   providers: [
@@ -31,21 +29,17 @@ export const authOptions: NextAuthOptions = {
   },
   callbacks: {
     async jwt({ token, user }) {
-      let newToken = token as TokenE;
       if (user) {
-        const newUser = user as nc_users;
-        newToken = { token, ...newUser };
+        token = { token, ...user };
       }
 
-      return newToken;
+      return token;
     },
     async session({ session, token }) {
-      let newSession = session as SessionE;
-      let newToken = token as TokenE;
-      if (newToken) {
-        newSession.user = newToken;
+      if (token) {
+        session.user = token;
       }
-      return newSession;
+      return session;
     },
   },
 };
