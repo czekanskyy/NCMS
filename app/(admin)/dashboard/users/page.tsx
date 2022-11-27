@@ -1,6 +1,6 @@
 import { serialize } from '@/utils/serializeData';
 import { prisma } from '@/api/prisma';
-import { nc_roles, nc_site_config, nc_users } from '@prisma/client';
+import { nc_roles, nc_users } from '@prisma/client';
 import UsersTable from './components/UsersTable';
 import AddUser from './components/AddUser';
 

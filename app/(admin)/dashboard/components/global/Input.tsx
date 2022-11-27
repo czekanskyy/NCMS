@@ -23,6 +23,7 @@ const Input = ({ label, placeholder, type = 'text', textarea = false, handler, v
         placeholder={placeholder}
         onChange={handler}
         required={required}
+        value={value || ''}
       />
     </div>
   ) : (
@@ -36,6 +37,7 @@ const Input = ({ label, placeholder, type = 'text', textarea = false, handler, v
         placeholder={placeholder}
         onChange={handler}
         required={required}
+        value={value || ''}
       />
     </div>
   );

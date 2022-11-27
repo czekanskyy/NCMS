@@ -2,7 +2,6 @@ import ChangeOwner from './components/ChangeOwner';
 import SettingsForm from './components/SettingsForm';
 import { prisma } from '@/api/prisma';
 import { serialize } from '@/utils/serializeData';
-import { SHA3 } from 'crypto-js';
 
 const SettingsPage = async () => {
   const pageConfig = await getPageConfig();

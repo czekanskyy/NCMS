@@ -1,44 +1,36 @@
 'use client';
 
-import { useState } from 'react';
-import { FaPlus } from 'react-icons/fa';
+import { nc_users } from '@prisma/client';
+import { MouseEventHandler, useState } from 'react';
 import Input from '../../components/global/Input';
 import ModalWrapper from '../../components/global/ModalWrapper';
 
+interface Props {
+  modalVisible: boolean;
+  user: nc_users;
+  onClose: () => void;
+}
+
 interface FormData {
-  username: string;
   fullName: string;
-  email: string;
   phone: string;
   bio: string;
   picture: string;
-  passwordF: string;
-  passwordR: string;
 }
 
-const AddUser = () => {
-  const [modalVisible, setModalVisible] = useState(false);
-
+const EditUser = ({ modalVisible, user, onClose }: Props) => {
   const initialValues: FormData = {
-    username: '',
-    fullName: '',
-    email: '',
-    phone: '',
-    bio: '',
-    picture: '',
-    passwordF: '',
-    passwordR: '',
+    fullName: user.fullName,
+    phone: user.phone,
+    bio: user.bio,
+    picture: user.picture,
   };
 
   const [values, setValues] = useState<FormData>(initialValues);
-  const [passwdMatch, setPasswdMatch] = useState(true);
 
-  const addUser: React.FormEventHandler<HTMLFormElement> = async e => {
+  const editUser: React.FormEventHandler<HTMLFormElement> = async e => {
     e.preventDefault();
-
-    if (values.passwordF !== values.passwordR) return;
-
-    const res = await fetch('http://localhost:3000/api/addUser', {
+    const res = await fetch('http://localhost:3000/api/editUser', {
       body: JSON.stringify(values),
       headers: {
         'Content-Type': 'application/json',
@@ -46,7 +38,7 @@ const AddUser = () => {
       method: 'POST',
     });
     if (res.status === 200) {
-      alert('Pomyślnie dodano');
+      alert('Pomyślnie edytowano');
       const target = e.target as HTMLFormElement;
       target.submit();
     }
@@ -54,16 +46,15 @@ const AddUser = () => {
 
   return (
     <>
-      <button className='w-max px-4 py-2 rounded-lg bg-indigo-500 font-medium flex items-center gap-x-2' onClick={() => setModalVisible(true)}>
-        <FaPlus />
-        Nowy użytkownik
-      </button>
-
-      <ModalWrapper visible={modalVisible} onClose={() => setModalVisible(false)}>
-        <form className='grid gap-3 lg:grid-cols-2' onSubmit={addUser}>
-          <Input label='Imię i nazwisko' required handler={e => setValues({ ...values, fullName: e.target.value })} />
-          <Input label='Nazwa użytkownika' required handler={e => setValues({ ...values, username: e.target.value })} />
-          <Input label='Adres email' type='email' required className='col-span-full' handler={e => setValues({ ...values, email: e.target.value })} />
+      <ModalWrapper visible={modalVisible} onClose={onClose}>
+        <form className='grid gap-3 lg:grid-cols-2' onSubmit={editUser}>
+          <Input
+            label='Imię i nazwisko'
+            required
+            handler={e => setValues({ ...values, fullName: e.target.value })}
+            value={values.fullName}
+            className='col-span-full'
+          />
           <Input
             label={
               <span>
@@ -72,6 +63,7 @@ const AddUser = () => {
             }
             type='tel'
             handler={e => setValues({ ...values, phone: e.target.value })}
+            value={values.phone}
           />
           <Input
             label={
@@ -81,6 +73,7 @@ const AddUser = () => {
             }
             type='url'
             handler={e => setValues({ ...values, picture: e.target.value })}
+            value={values.picture}
           />
           <Input
             label={
@@ -91,26 +84,14 @@ const AddUser = () => {
             className='col-span-full'
             textarea
             handler={e => setValues({ ...values, bio: e.target.value })}
-          />
-          <Input label='Hasło' type='password' required handler={e => setValues({ ...values, passwordF: e.target.value })} />
-          <Input
-            label='Powtórz hasło'
-            type='password'
-            required
-            handler={e => {
-              setValues({ ...values, passwordR: e.target.value });
-              if (e.target.value !== values.passwordF) return setPasswdMatch(false);
-              setPasswdMatch(true);
-            }}
-            error={!passwdMatch}
+            value={values.bio}
           />
           <div className='col-span-full flex justify-end gap-2'>
             <button
-              type='button'
               className='text-white max-w-max px-4 py-2 rounded-lg w-96 bg-red-500 outline-none mt-2 font-medium transition-all hover:bg-red-600 focus:bg-red-600 active:bg-red-600'
               onClick={e => {
                 e.preventDefault();
-                setModalVisible(false);
+                onClose();
               }}
             >
               Anuluj
@@ -128,4 +109,4 @@ const AddUser = () => {
   );
 };
 
-export default AddUser;
+export default EditUser;
