@@ -39,7 +39,6 @@ const PostDataForm = () => {
     e.preventDefault();
 
     try {
-      console.log(values);
       const res = await fetch('http://localhost:3000/api/addPost', {
         body: JSON.stringify({ ...values, content: DOMPurify.sanitize(values.content) }),
         headers: {
