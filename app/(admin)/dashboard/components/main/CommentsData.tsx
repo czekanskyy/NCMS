@@ -9,7 +9,7 @@ interface Props {
 
 const deleteComment = async (id: string) => {
   try {
-    const res = await fetch('http://localhost:3000/api/deleteComment', {
+    const res = await fetch('https://localhost:3000/api/deleteComment', {
       body: JSON.stringify({ id }),
       headers: {
         'Content-Type': 'application/json',

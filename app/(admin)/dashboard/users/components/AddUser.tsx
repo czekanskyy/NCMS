@@ -38,7 +38,7 @@ const AddUser = () => {
 
     if (values.passwordF !== values.passwordR) return;
 
-    const res = await fetch('http://localhost:3000/api/addUser', {
+    const res = await fetch('https://localhost:3000/api/addUser', {
       body: JSON.stringify(values),
       headers: {
         'Content-Type': 'application/json',

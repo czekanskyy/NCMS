@@ -24,7 +24,7 @@ const AddCommentForm = ({ post }: Props) => {
     e.preventDefault();
 
     try {
-      const res = await fetch('http://localhost:3000/api/addComment', {
+      const res = await fetch('https://localhost:3000/api/addComment', {
         body: JSON.stringify(values),
         headers: {
           'Content-Type': 'application/json',

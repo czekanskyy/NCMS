@@ -12,7 +12,7 @@ const ChangeOwner = ({ ownerId }: Props) => {
 
   const changeOwner: React.FormEventHandler<HTMLFormElement> = async e => {
     e.preventDefault();
-    const res = await fetch('http://localhost:3000/api/changeOwner', {
+    const res = await fetch('https://localhost:3000/api/changeOwner', {
       body: JSON.stringify({ id }),
       headers: {
         'Content-Type': 'application/json',

@@ -17,14 +17,6 @@ const nextConfig = {
   experimental: {
     appDir: true,
   },
-  async rewrites() {
-    return [
-      {
-        source: '/api/:path*',
-        destination: 'https://n-cms.netlify.app/:path*',
-      },
-    ];
-  },
 };
 
 module.exports = nextConfig;

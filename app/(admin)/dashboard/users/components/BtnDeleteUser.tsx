@@ -10,7 +10,7 @@ interface Props {
 const deleteUser = async (e: FormEvent<HTMLFormElement>, id: string) => {
   e.preventDefault();
 
-  const res = await fetch('http://localhost:3000/api/deleteUser', {
+  const res = await fetch('https://localhost:3000/api/deleteUser', {
     body: JSON.stringify({ id }),
     headers: {
       'Content-Type': 'application/json',
