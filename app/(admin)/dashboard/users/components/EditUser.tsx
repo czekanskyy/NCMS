@@ -30,7 +30,7 @@ const EditUser = ({ modalVisible, user, onClose }: Props) => {
 
   const editUser: React.FormEventHandler<HTMLFormElement> = async e => {
     e.preventDefault();
-    const res = await fetch('https://localhost:3000/api/editUser', {
+    const res = await fetch('https://n-cms.netlify.app/api/editUser', {
       body: JSON.stringify(values),
       headers: {
         'Content-Type': 'application/json',

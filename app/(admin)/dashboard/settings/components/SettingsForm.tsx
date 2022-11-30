@@ -27,7 +27,7 @@ const SettingsForm = ({ configData }: Props) => {
 
   const updateConfig: React.FormEventHandler<HTMLFormElement> = async e => {
     e.preventDefault();
-    const res = await fetch('https://localhost:3000/api/updateConfig', {
+    const res = await fetch('https://n-cms.netlify.app/api/updateConfig', {
       body: JSON.stringify(values),
       headers: {
         'Content-Type': 'application/json',
