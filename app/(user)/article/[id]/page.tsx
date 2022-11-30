@@ -23,6 +23,18 @@ const Article = async ({ params: { id: pathname } }: Props) => {
     },
   });
 
+  // Increase views of the post on every visit
+  await prisma.nc_posts.update({
+    data: {
+      views: {
+        increment: 1,
+      },
+    },
+    where: {
+      id,
+    },
+  });
+
   return (
     <>
       <Header

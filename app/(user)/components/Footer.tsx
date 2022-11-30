@@ -6,7 +6,7 @@ const Footer = () => {
       <div className='max-w-6xl w-full grid gap-y-6'>
         {/* <hr /> */}
         <div className='flex justify-between text-sm'>
-          <p>&copy; {new Date().getFullYear()} Web4U - wszelkie prawa zastrzeżone</p>
+          <p>&copy; {new Date().getFullYear()} Blogger - wszelkie prawa zastrzeżone</p>
 
           <Link href='/dashboard' className='text-sm font-medium p-1 underline text-gray-800'>
             Zaloguj się do Panelu

@@ -1,13 +1,18 @@
+import Image from 'next/image';
 import Link from 'next/link';
 import { FaSearch } from 'react-icons/fa';
 import UserBlock from './UserBlock';
+import Logo from '../../../public/favicon.png';
 
 const Navbar = () => {
   return (
     <nav className='bg-white px-8 sticky left-0 top-0 shadow-lg shadow-black/5 z-40'>
       <div className='max-w-6xl w-full flex justify-between items-center h-16 text-lg mx-auto'>
-        <Link href='/' className='text-2xl font-semibold'>
-          Web<span className='text-blue-500'>4U</span>
+        <Link href='/' className='text-2xl font-semibold flex items-center gap-x-2'>
+          <div className='relative w-7 h-7'>
+            <Image src={Logo} alt='Logo' fill />
+          </div>
+          <p>Blogger</p>
         </Link>
 
         <UserBlock />
