@@ -12,8 +12,6 @@ interface Props {
 const handler = async (req: NextApiRequest, res: NextApiResponse) => {
   const { title, content, authorId, thumbnail, tags }: Props = req.body;
 
-  console.log(authorId);
-
   try {
     if (content === '') throw new Error('Nie podano treści');
 

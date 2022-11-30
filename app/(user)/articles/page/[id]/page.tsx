@@ -14,8 +14,6 @@ const Articles = async ({ params: { id } }: Props) => {
   const posts = await getPosts(+id - 1);
   const postsLen = await countPosts();
 
-  console.log(postsLen);
-
   return (
     <article className='flex justify-center p-8 pb-16 bg-gray-100'>
       <div className='max-w-6xl w-full grid grid-cols-12 gap-4'>
@@ -58,6 +56,9 @@ const getPosts = async (skip: number) =>
             name: true,
           },
         },
+      },
+      orderBy: {
+        createdAt: 'desc',
       },
     })
   ) as PostWithMetadata[];

@@ -2,6 +2,7 @@ import { serialize } from '@/utils/serializeData';
 import { nc_comments } from '@prisma/client';
 import AddCommentForm from './AddCommentForm';
 import Comment from './Comment';
+import { prisma } from '@/api/prisma';
 
 interface Props {
   id: string;

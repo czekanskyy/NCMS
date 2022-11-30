@@ -76,4 +76,6 @@ const getPostTags = async (id: string) =>
     })
   ) as nc_tags[];
 
+export const revalidate = 60;
+
 export default Article;

@@ -1,14 +1,10 @@
 import Image from 'next/image';
 import Link from 'next/link';
-import { serialize } from '@/utils/serializeData';
 import { toURLPath } from '@/utils/toURLPath';
-import { prisma } from '@/api/prisma';
 import { FaEye } from 'react-icons/fa';
 import { nc_posts } from '@prisma/client';
 
-const Highlights = async () => {
-  const posts = await getPosts();
-
+const Highlights = ({ posts }: { posts: nc_posts[] }) => {
   return (
     <section className='p-12 bg-white flex justify-center font-medium'>
       <div className='max-w-6xl w-full grid gap-y-5'>
@@ -44,15 +40,5 @@ const Highlights = async () => {
     </section>
   );
 };
-
-const getPosts = async () =>
-  serialize(
-    await prisma.nc_posts.findMany({
-      take: 3,
-      orderBy: {
-        createdAt: 'desc',
-      },
-    })
-  ) as nc_posts[];
 
 export default Highlights;
